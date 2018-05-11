@@ -1,18 +1,19 @@
 //
-//  ViewController.swift
+//  OnboardController.swift
 //  Movie Night
 //
-//  Created by Nathan on 4/6/18.
+//  Created by Nathan on 4/26/18.
 //  Copyright © 2018 Nathan Fulkerson. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class OnboardController: UIPageViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -20,6 +21,4 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
 }
-
