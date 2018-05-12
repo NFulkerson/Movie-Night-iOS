@@ -8,12 +8,12 @@
 
 import Foundation
 
-protocol APIRequest: Encodable {
+protocol APIRequest {
     associatedtype Response: Decodable
     var resourceName: String { get }
 }
 
-protocol TMDBClient {
+protocol APIClient {
     typealias ResultCallback<Value> = (Result<Value>) -> Void
     func send<T: APIRequest>(
         _ request: T,
@@ -21,18 +21,47 @@ protocol TMDBClient {
     )
 }
 
-class TMDBAPI: TMDBClient {
+class TMDBClient: APIClient {
+    let session: URLSession
+    let apikey = "ee27af53767941e284de0d1b5c3ace1c"
 
-    func send<T>(_ request: T, completion: @escaping (Result<T.Response>) -> Void) where T : APIRequest {
-        
+    init(configuration: URLSessionConfiguration) {
+        self.session = URLSession(configuration: configuration)
     }
+
+    convenience init() {
+        self.init(configuration: .default)
+    }
+
+    func send<T: APIRequest>(_ request: T, completion: @escaping (Result<T.Response>) -> Void) {
+        let endpoint = self.endpoint(for: request)
+        let request = URLRequest(url: endpoint)
+        print("Henlo world")
+        let task = session.dataTask(with: request) { (data, response, error) in
+            if let data = data {
+                do {
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    let decoded = try decoder.decode(T.Response.self, from: data)
+
+                    completion(.success(decoded))
+                } catch {
+                    print(error)
+                    completion(.failure)
+                }
+            } else {
+                print("No data")
+                completion(.failure)
+            }
+        }
+
+        task.resume()
+
+    }
+
+    private func endpoint<T: APIRequest>(for request: T) -> URL {
+        return URL(string: "https://api.themoviedb.org/3/\(request.resourceName)?api_key=\(apikey)")!
+    }
+
 }
 
-struct GetMovieDetails: APIRequest {
-    typealias Response = [Movie]
-    var resourceName: String {
-        return "/movie/\(id)"
-    }
-    
-    let id: String
-}

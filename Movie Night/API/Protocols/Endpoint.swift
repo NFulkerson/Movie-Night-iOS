@@ -14,9 +14,9 @@ enum Result<T> {
 }
 
 protocol Endpoint {
-    associatedtype Resource: Decodable
     var base: String { get }
     var path: String { get }
+
     var queryItems: [URLQueryItem] { get }
 }
 
