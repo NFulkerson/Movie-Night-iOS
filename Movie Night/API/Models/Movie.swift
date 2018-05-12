@@ -14,7 +14,7 @@ struct Movie: Decodable {
 
     let adult: Bool
     let backdropPath: String
-//    let belongsToCollection: Bool?
+    let belongsToCollection: Bool?
     let budget: Int
     let genres: [Genre]
     let homepage: String?
@@ -23,7 +23,7 @@ struct Movie: Decodable {
     let originalTitle: String
 
     let overview: String?
-//    let popularity: Int
+    let popularity: Double
     let posterPath: String?
 //    let productionCompanies: [Company]
 //    let productionCountries: [Country]
@@ -32,11 +32,43 @@ struct Movie: Decodable {
     let runtime: Int
 
 //    let spokenLanguages: [Language]
-    let status: ProductionStatus?
     let tagline: String
     let title: String
     let video: Bool
-    let voteAverage: Int
+    let voteAverage: Double
     let voteCount: Int
 
+}
+
+struct GetMovieDetails: APIRequest {
+    typealias Response = Movie
+
+    var resourceName: String {
+        return "movie/\(movieId)"
+    }
+
+    var parameters: [URLQueryItem] = []
+
+    let movieId: Int
+
+    init(id: Int) {
+        movieId = id
+    }
+}
+
+struct GetPopularMovies: APIRequest {
+    typealias Response = ListContainer
+
+    var resourceName: String {
+        return "movie/popular"
+    }
+
+    var parameters: [URLQueryItem] = []
+}
+
+struct ListContainer: Decodable {
+    let page: Int
+    let totalPages: Int
+    let totalResults: Int
+    let results: [Movie]
 }
