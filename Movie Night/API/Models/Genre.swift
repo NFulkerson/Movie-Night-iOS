@@ -8,8 +8,18 @@
 
 import Foundation
 
-struct Genre: Decodable {
+struct Genre: Codable {
     var id: Int
     var name: String
 }
 
+struct GenreContainer: Decodable {
+    let genres: [Genre]
+}
+
+struct GetGenres: APIRequest {
+    typealias Response = GenreContainer
+    var resourceName: String {
+        return "genre/list"
+    }
+}

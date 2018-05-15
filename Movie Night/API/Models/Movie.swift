@@ -12,7 +12,6 @@ struct Movie: Decodable {
     let id: Int
     let imdbID: String?
 
-    let adult: Bool
     let backdropPath: String
     let belongsToCollection: Bool?
     let budget: Int
@@ -39,6 +38,8 @@ struct Movie: Decodable {
     let voteCount: Int
 
 }
+
+// MARK: Movie-related endpoints
 
 struct GetMovieDetails: APIRequest {
     typealias Response = Movie

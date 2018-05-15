@@ -16,20 +16,32 @@ enum Gender: Int, Decodable {
 
 struct Person: Decodable {
     let id: Int
-    let imdbID: String
-
+    
     let name: String
     let placeOfBirth: String?
 
     let profilePath: String
-    let adult: Bool
-    let alias: [String]
-    let biography: String
+
+    let biography: String?
 
     let birthday: String?
     let deathday: String?
 
-    let gender: Gender
+    let gender: Gender?
     let homepage: URL?
 
+}
+// fodder for generic
+struct PersonContainer: Decodable {
+    let page: Int
+    let results: [Person]
+    let totalResults: Int
+    let totalPages: Int
+}
+
+struct GetPopularActors: APIRequest {
+    typealias Response = PersonContainer
+    var resourceName: String {
+        return "person/popular"
+    }
 }
