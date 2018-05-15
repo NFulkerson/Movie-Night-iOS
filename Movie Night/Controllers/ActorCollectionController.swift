@@ -1,56 +1,52 @@
 //
-//  GenreViewController.swift
+//  ActorCollectionController.swift
 //  Movie Night
 //
-//  Created by Nathan on 5/4/18.
+//  Created by Nathan on 5/14/18.
 //  Copyright © 2018 Nathan Fulkerson. All rights reserved.
 //
 
 import UIKit
 
-class GenreViewController: UICollectionViewController, Storyboarded {
+class ActorCollectionController: UICollectionViewController, Storyboarded {
 
     weak var coordinator: MainCoordinator?
-
-    var genreList: [Genre] = [] {
+    var actors: [Person] = [] {
         didSet {
-            dataSource.update(with: genreList)
-            print("Reloaded data with \(genreList)")
+            dataSource.update(with: actors)
             DispatchQueue.main.async { [weak self] in
-                self?.dataSource.collectionView.reloadData()
+                self?.collectionView?.reloadData()
             }
         }
     }
 
-    lazy var dataSource: GenreListDataSource = {
-        return GenreListDataSource(genres: [], collectionView: self.collectionView!)
+    lazy var dataSource: ActorListDataSource = {
+        return ActorListDataSource(actors: [], collectionView: self.collectionView!)
     }()
 
     let client = TMDBClient()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+
         collectionView?.dataSource = dataSource
         collectionView?.delegate = self
 
-        client.send(GetGenres()) { [weak self] (result) in
+        client.send(GetPopularActors()) { [weak self] (result) in
             switch result {
-            case .success(let genres):
-                print("Updating genre list")
-                self?.genreList = genres.genres
+            case .success(let actorList):
+                self?.actors = actorList.results
             case .failure:
                 return
             }
         }
-
     }
 
 }
 
-extension GenreViewController: UICollectionViewDelegateFlowLayout {
+extension ActorCollectionController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (view.frame.width-20)/3
+        let width = (collectionView.frame.width - 10) / 5
         let height = width + 25
         return CGSize(width: width, height: height)
     }
