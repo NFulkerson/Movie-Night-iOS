@@ -14,8 +14,7 @@ class TestViewController: UIViewController, Storyboarded {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.title = "Movie Night"
     }
 
     @IBAction func presentGenreVC(_ sender: Any) {

@@ -16,7 +16,7 @@ class MovieViewController: UICollectionViewController, Storyboarded {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        navigationController?.title = "Favorite Movies"
     }
 
     override func didReceiveMemoryWarning() {

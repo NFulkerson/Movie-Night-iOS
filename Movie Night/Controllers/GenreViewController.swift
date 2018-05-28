@@ -30,7 +30,7 @@ class GenreViewController: UICollectionViewController, Storyboarded {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        navigationController?.title = "Favorite Genres"
         collectionView?.dataSource = dataSource
         collectionView?.delegate = self
 

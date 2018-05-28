@@ -17,6 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         let navController = UINavigationController()
+        navController.navigationBar.barTintColor = UIColor(named: "DesaturatedRed")
+        navController.navigationBar.isTranslucent = false
+        navController.navigationBar.tintColor = .white
+        navController.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         coordinator = MainCoordinator(navigationController: navController)
         coordinator?.start()
 
