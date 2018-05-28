@@ -13,10 +13,15 @@ class ActorCollectionCell: UICollectionViewCell {
 
     @IBOutlet weak var actorLabel: UILabel!
     @IBOutlet weak var photo: UIImageView!
-    
+
+    var actor: Person? {
+        didSet {
+            actorLabel.text = actor?.name
+        }
+    }
 
     func configure(with actor: Person) {
-        actorLabel.text = actor.name
-        photo.image = UIImage(named: "Default")
+        self.actor = actor
+        self.photo.image = actor.photo ?? UIImage(named: "Default")!
     }
 }
