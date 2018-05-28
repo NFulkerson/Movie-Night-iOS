@@ -6,7 +6,7 @@
 //  Copyright © 2018 Nathan Fulkerson. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 enum Gender: Int, Decodable {
     case unset = 0
@@ -14,21 +14,30 @@ enum Gender: Int, Decodable {
     case male = 2
 }
 
-struct Person: Decodable {
+class Person: Decodable {
+    var imageState: ImageState = .placeholder
+
+    var imageURLPath: URL? {
+        guard let path = profilePath else {
+            return nil
+        }
+        return URL(string: "https://image.tmdb.org/t/p/w185/\(path)")
+    }
+
     let id: Int
-    
     let name: String
-    let placeOfBirth: String?
-
-    let profilePath: String
-
+    let profilePath: String?
     let biography: String?
-
-    let birthday: String?
-    let deathday: String?
-
     let gender: Gender?
-    let homepage: URL?
+    var photo: UIImage?
+
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case profilePath
+        case biography
+        case gender
+    }
 
 }
 // fodder for generic
@@ -41,7 +50,15 @@ struct PersonContainer: Decodable {
 
 struct GetPopularActors: APIRequest {
     typealias Response = PersonContainer
+
     var resourceName: String {
         return "person/popular"
+    }
+    var parameters: [URLQueryItem] = []
+}
+
+extension GetPopularActors {
+    init(page: Int) {
+        parameters.append(URLQueryItem(name: "page", value: "\(page)"))
     }
 }

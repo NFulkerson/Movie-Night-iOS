@@ -6,36 +6,52 @@
 //  Copyright © 2018 Nathan Fulkerson. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-struct Movie: Decodable {
+enum ImageState {
+    case placeholder
+    case downloaded
+    case failed
+}
+
+class Movie: Decodable {
+    var imageState: ImageState = .placeholder
     let id: Int
-    let imdbID: String?
 
     let backdropPath: String
     let belongsToCollection: Bool?
-    let budget: Int
     let genres: [Genre]
-    let homepage: String?
-
-    let originalLanguage: String
-    let originalTitle: String
 
     let overview: String?
     let popularity: Double
     let posterPath: String?
-//    let productionCompanies: [Company]
-//    let productionCountries: [Country]
+
     let releaseDate: String
-    let revenue: Int
     let runtime: Int
 
-//    let spokenLanguages: [Language]
     let tagline: String
     let title: String
-    let video: Bool
+
     let voteAverage: Double
     let voteCount: Int
+
+    var image: UIImage?
+
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case backdropPath
+        case belongsToCollection
+        case genres
+        case overview
+        case popularity
+        case posterPath
+        case releaseDate
+        case runtime
+        case tagline
+        case title
+        case voteAverage
+        case voteCount
+    }
 
 }
 

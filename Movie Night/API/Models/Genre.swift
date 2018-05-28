@@ -22,4 +22,5 @@ struct GetGenres: APIRequest {
     var resourceName: String {
         return "genre/list"
     }
+    var parameters: [URLQueryItem] = []
 }
