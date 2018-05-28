@@ -11,6 +11,7 @@ import Foundation
 protocol APIRequest {
     associatedtype Response: Decodable
     var resourceName: String { get }
+    var parameters: [URLQueryItem] { get }
 }
 
 protocol APIClient {
@@ -24,6 +25,7 @@ protocol APIClient {
 class TMDBClient: APIClient {
     let session: URLSession
     let apikey = "ee27af53767941e284de0d1b5c3ace1c"
+    let apiBase = "https://api.themoviedb.org"
 
     init(configuration: URLSessionConfiguration) {
         self.session = URLSession(configuration: configuration)
@@ -36,8 +38,9 @@ class TMDBClient: APIClient {
     func send<T: APIRequest>(_ request: T, completion: @escaping (Result<T.Response>) -> Void) {
         let endpoint = self.endpoint(for: request)
         let request = URLRequest(url: endpoint)
-        print("Henlo world")
+        print(request.url)
         let task = session.dataTask(with: request) { (data, response, error) in
+            print("Session response: \(response?.description)")
             if let data = data {
                 do {
                     let decoder = JSONDecoder()
@@ -60,7 +63,18 @@ class TMDBClient: APIClient {
     }
 
     private func endpoint<T: APIRequest>(for request: T) -> URL {
-        return URL(string: "https://api.themoviedb.org/3/\(request.resourceName)?api_key=\(apikey)")!
+        guard var urlComponents = URLComponents(string: apiBase) else {
+            return URL(string: "https://api.themoviedb.org")!
+        }
+        urlComponents.path = "/3/\(request.resourceName)"
+
+        urlComponents.queryItems = request.parameters
+        urlComponents.queryItems?.append(URLQueryItem(name: "api_key", value: apikey))
+        
+        print("Query Items: \(urlComponents.queryItems)")
+
+        return urlComponents.url!
+
     }
 
 }
