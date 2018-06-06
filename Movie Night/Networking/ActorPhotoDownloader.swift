@@ -32,11 +32,16 @@ class ActorPhotoDownloader: Operation {
             return
         }
 
+        if actor.imageState == .downloaded {
+          print("\(imagePath) is already present somewhar.")
+        }
+
         let imageData = try! Data(contentsOf: imagePath)
 
         if imageData.count > 0 {
             actor.photo = UIImage(data: imageData)
             actor.imageState = .downloaded
+
         } else {
             actor.imageState = .failed
         }

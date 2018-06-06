@@ -37,6 +37,8 @@
 		D8A569492077CFAB004F9262 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8A569482077CFAB004F9262 /* Assets.xcassets */; };
 		D8A5694C2077CFAB004F9262 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8A5694A2077CFAB004F9262 /* LaunchScreen.storyboard */; };
 		D8C5369220AFBD19001EF3E0 /* InfiniteScrollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C5369120AFBD19001EF3E0 /* InfiniteScrollable.swift */; };
+		D8E3E12F20C78A4900D00872 /* MovieListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E3E12E20C78A4900D00872 /* MovieListDataSource.swift */; };
+		D8E3E13120C78C4A00D00872 /* MovieCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E3E13020C78C4A00D00872 /* MovieCollectionCell.swift */; };
 		D8E4283320BC85890075D0A6 /* ActorPhotoDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E4283220BC85890075D0A6 /* ActorPhotoDownloader.swift */; };
 		D8FC45BA20B5D48F00263EEF /* MovieImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC45B920B5D48F00263EEF /* MovieImageDownloader.swift */; };
 		D8FC45BC20B5ECBD00263EEF /* PendingOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC45BB20B5ECBD00263EEF /* PendingOperations.swift */; };
@@ -87,6 +89,8 @@
 		D8A5694B2077CFAB004F9262 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D8A5694D2077CFAB004F9262 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8C5369120AFBD19001EF3E0 /* InfiniteScrollable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteScrollable.swift; sourceTree = "<group>"; };
+		D8E3E12E20C78A4900D00872 /* MovieListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListDataSource.swift; sourceTree = "<group>"; };
+		D8E3E13020C78C4A00D00872 /* MovieCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionCell.swift; sourceTree = "<group>"; };
 		D8E4283220BC85890075D0A6 /* ActorPhotoDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorPhotoDownloader.swift; sourceTree = "<group>"; };
 		D8FC45B920B5D48F00263EEF /* MovieImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieImageDownloader.swift; sourceTree = "<group>"; };
 		D8FC45BB20B5ECBD00263EEF /* PendingOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingOperations.swift; sourceTree = "<group>"; };
@@ -124,6 +128,7 @@
 			children = (
 				D81B83F320AA470600506DC5 /* GenreListDataSource.swift */,
 				D81B83FB20AA8E9A00506DC5 /* ActorListDataSource.swift */,
+				D8E3E12E20C78A4900D00872 /* MovieListDataSource.swift */,
 			);
 			path = "Data Source";
 			sourceTree = "<group>";
@@ -203,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				D89B1ED120AA09BE0080B358 /* GenreCollectionCell.swift */,
+				D8E3E13020C78C4A00D00872 /* MovieCollectionCell.swift */,
 				D81B83F920AA7E4700506DC5 /* ActorCollectionCell.swift */,
 				D81149B920B3550E0008A650 /* LoadingCollectionViewCell.swift */,
 			);
@@ -372,6 +378,7 @@
 				D8FC45BC20B5ECBD00263EEF /* PendingOperations.swift in Sources */,
 				D8900C622079E0FA00DCE64D /* Genre.swift in Sources */,
 				D81B83FC20AA8E9A00506DC5 /* ActorListDataSource.swift in Sources */,
+				D8E3E13120C78C4A00D00872 /* MovieCollectionCell.swift in Sources */,
 				D8900C702079E79300DCE64D /* Keyword.swift in Sources */,
 				D8900C642079E25500DCE64D /* Movie.swift in Sources */,
 				D8C5369220AFBD19001EF3E0 /* InfiniteScrollable.swift in Sources */,
@@ -383,6 +390,7 @@
 				D8471CDA2092C4470038CBEB /* OnboardController.swift in Sources */,
 				D82532AA209CDD960014DF8B /* MovieViewController.swift in Sources */,
 				D82532AC209CE0A60014DF8B /* GenreViewController.swift in Sources */,
+				D8E3E12F20C78A4900D00872 /* MovieListDataSource.swift in Sources */,
 				D81B83F820AA7DDA00506DC5 /* ActorCollectionController.swift in Sources */,
 				D8FC45BA20B5D48F00263EEF /* MovieImageDownloader.swift in Sources */,
 				D81B83F420AA470600506DC5 /* GenreListDataSource.swift in Sources */,

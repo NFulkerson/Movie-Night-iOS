@@ -14,11 +14,11 @@ class GenreCollectionCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var genreLabel: UILabel!
 
-
     func configure(with genre: String) {
 //        imageView.image = UIImage(named: genre)
         genreLabel.text = genre
         imageView.image = UIImage(named: genre) ?? UIImage(named: "Default")
+        
     }
 
 }

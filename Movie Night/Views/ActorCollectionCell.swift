@@ -9,19 +9,20 @@
 import UIKit
 
 class ActorCollectionCell: UICollectionViewCell {
-    static let reuseIdentifier: String = "ActorCell"
+  static let reuseIdentifier: String = "ActorCell"
+  
+  @IBOutlet weak var actorLabel: UILabel!
+  @IBOutlet weak var photo: UIImageView!
 
-    @IBOutlet weak var actorLabel: UILabel!
-    @IBOutlet weak var photo: UIImageView!
-
-    var actor: Person? {
-        didSet {
-            actorLabel.text = actor?.name
-        }
+  var actor: Person? {
+    didSet {
+      actorLabel.text = actor?.name
     }
+  }
 
-    func configure(with actor: Person) {
-        self.actor = actor
-        self.photo.image = actor.photo ?? UIImage(named: "Default")!
-    }
+  func configure(with actor: Person) {
+    self.actor = actor
+    self.photo.image = actor.photo ?? UIImage(named: "Default")!
+  }
+
 }

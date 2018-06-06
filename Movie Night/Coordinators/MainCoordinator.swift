@@ -22,19 +22,19 @@ class MainCoordinator: Coordinator {
         navigationController.pushViewController(vc, animated: false)
     }
 
-    func selectMovies() {
+    @objc func selectMovies() {
         let vc = MovieViewController.instantiate()
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: true)
     }
 
-    func selectGenres() {
+    @objc func selectGenres() {
         let vc = GenreViewController.instantiate()
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: true)
     }
 
-    func selectActors() {
+    @objc func selectActors() {
         let vc = ActorCollectionController.instantiate()
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: true)
