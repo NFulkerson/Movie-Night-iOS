@@ -61,22 +61,13 @@ class GenreViewController: UICollectionViewController, Storyboarded {
 
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     print("Cell tapped at \(indexPath.row)")
-    guard let selectedCell = collectionView.cellForItem(at: indexPath) else { return }
-    UIView.animate(withDuration: 0.8) {
-      selectedCell.layer.borderWidth = 3
-      selectedCell.layer.borderColor = UIColor.blue.cgColor
-    }
+
     if navigationItem.rightBarButtonItem == nil {
       navigationItem.rightBarButtonItem = nextButton
     }
   }
 
   override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-    guard let selectedCell = collectionView.cellForItem(at: indexPath) else { return }
-    UIView.animate(withDuration: 0.8) {
-      selectedCell.layer.borderWidth = 0
-      selectedCell.layer.borderColor = UIColor.clear.cgColor
-    }
 
     if collectionView.indexPathsForSelectedItems == nil || collectionView.indexPathsForSelectedItems?.count == 0 {
       navigationItem.rightBarButtonItem = nil
