@@ -20,7 +20,7 @@ class MovieListDataSource: NSObject, UICollectionViewDataSource {
   }
 
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return totalMovies
+    return movies.count
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -30,15 +30,19 @@ class MovieListDataSource: NSObject, UICollectionViewDataSource {
     } else {
       let movieCell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCollectionCell.reuseIdentifier, for: indexPath) as! MovieCollectionCell
       let movie = movies[indexPath.row]
+      movieCell.moviePosterImageView.image = UIImage(named: "Default")
       movieCell.configure(with: movie)
 
       return movieCell
     }
   }
 
+  func update(with films: [Movie]) {
+    self.movies.append(contentsOf: films)
+  }
+
   private func isLoadingIndex(_ indexPath: IndexPath) -> Bool {
     return indexPath.row >= movies.count
   }
 
-  
 }
