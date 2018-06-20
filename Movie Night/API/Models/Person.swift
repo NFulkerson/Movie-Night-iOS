@@ -8,13 +8,13 @@
 
 import UIKit
 
-enum Gender: Int, Decodable {
+enum Gender: Int, Codable {
     case unset = 0
     case female = 1
     case male = 2
 }
 
-struct Person: Decodable {
+struct Person: Codable {
 
     var imageURLPath: URL? {
         guard let path = profilePath else {
