@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		D8047D3020A34AAD00CA85BE /* MovieNight_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8047D2F20A34AAD00CA85BE /* MovieNight_Tests.swift */; };
+		D806235720DAC11E00B84761 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D806235620DAC11E00B84761 /* Kingfisher.framework */; };
+		D806235820DAC11E00B84761 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D806235620DAC11E00B84761 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D806235B20DAE70100B84761 /* MovieGoer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D806235A20DAE70100B84761 /* MovieGoer.swift */; };
 		D81149BA20B3550E0008A650 /* LoadingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81149B920B3550E0008A650 /* LoadingCollectionViewCell.swift */; };
 		D81B83F420AA470600506DC5 /* GenreListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81B83F320AA470600506DC5 /* GenreListDataSource.swift */; };
 		D81B83F820AA7DDA00506DC5 /* ActorCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81B83F720AA7DDA00506DC5 /* ActorCollectionController.swift */; };
@@ -38,7 +41,6 @@
 		D8A569492077CFAB004F9262 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8A569482077CFAB004F9262 /* Assets.xcassets */; };
 		D8A5694C2077CFAB004F9262 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8A5694A2077CFAB004F9262 /* LaunchScreen.storyboard */; };
 		D8B2B77920CF54A5005F7D76 /* PhotoDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B2B77820CF54A5005F7D76 /* PhotoDownloader.swift */; };
-		D8C5369220AFBD19001EF3E0 /* InfiniteScrollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C5369120AFBD19001EF3E0 /* InfiniteScrollable.swift */; };
 		D8E3E12F20C78A4900D00872 /* MovieListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E3E12E20C78A4900D00872 /* MovieListDataSource.swift */; };
 		D8E3E13120C78C4A00D00872 /* MovieCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E3E13020C78C4A00D00872 /* MovieCollectionCell.swift */; };
 		D8FC45BC20B5ECBD00263EEF /* PendingOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC45BB20B5ECBD00263EEF /* PendingOperations.swift */; };
@@ -54,10 +56,26 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		D806235920DAC11F00B84761 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D806235820DAC11E00B84761 /* Kingfisher.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		D8047D2D20A34AAD00CA85BE /* MovieNight Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MovieNight Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8047D2F20A34AAD00CA85BE /* MovieNight_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieNight_Tests.swift; sourceTree = "<group>"; };
 		D8047D3120A34AAD00CA85BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D806235620DAC11E00B84761 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
+		D806235A20DAE70100B84761 /* MovieGoer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGoer.swift; sourceTree = "<group>"; };
 		D81149B920B3550E0008A650 /* LoadingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCollectionViewCell.swift; sourceTree = "<group>"; };
 		D81B83F320AA470600506DC5 /* GenreListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreListDataSource.swift; sourceTree = "<group>"; };
 		D81B83F720AA7DDA00506DC5 /* ActorCollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorCollectionController.swift; sourceTree = "<group>"; };
@@ -90,7 +108,6 @@
 		D8A5694B2077CFAB004F9262 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D8A5694D2077CFAB004F9262 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8B2B77820CF54A5005F7D76 /* PhotoDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDownloader.swift; sourceTree = "<group>"; };
-		D8C5369120AFBD19001EF3E0 /* InfiniteScrollable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteScrollable.swift; sourceTree = "<group>"; };
 		D8E3E12E20C78A4900D00872 /* MovieListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListDataSource.swift; sourceTree = "<group>"; };
 		D8E3E13020C78C4A00D00872 /* MovieCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionCell.swift; sourceTree = "<group>"; };
 		D8FC45BB20B5ECBD00263EEF /* PendingOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingOperations.swift; sourceTree = "<group>"; };
@@ -108,6 +125,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D806235720DAC11E00B84761 /* Kingfisher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,7 +146,6 @@
 			children = (
 				D81B83F320AA470600506DC5 /* GenreListDataSource.swift */,
 				D81B83FB20AA8E9A00506DC5 /* ActorListDataSource.swift */,
-				D8361BEE20D3671D00967B71 /* UIImageView+Extension.swift */,
 				D8E3E12E20C78A4900D00872 /* MovieListDataSource.swift */,
 			);
 			path = "Data Source";
@@ -139,6 +156,7 @@
 			children = (
 				D82532A2209CD7930014DF8B /* Coordinator.swift */,
 				D82532A7209CD9FC0014DF8B /* MainCoordinator.swift */,
+				D82532A4209CD85B0014DF8B /* Storyboarded.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -158,6 +176,7 @@
 		D8471CDF20991BBF0038CBEB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				D8361BEE20D3671D00967B71 /* UIImageView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -183,6 +202,7 @@
 				D8900C6D2079E69400DCE64D /* Certification.swift */,
 				D8900C6F2079E79300DCE64D /* Keyword.swift */,
 				D8900C652079E48900DCE64D /* Company.swift */,
+				D806235A20DAE70100B84761 /* MovieGoer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -218,6 +238,7 @@
 		D8A569352077CFAA004F9262 = {
 			isa = PBXGroup;
 			children = (
+				D806235620DAC11E00B84761 /* Kingfisher.framework */,
 				D8A569402077CFAA004F9262 /* Movie Night */,
 				D8047D2E20A34AAD00CA85BE /* MovieNight Tests */,
 				D8A5693F2077CFAA004F9262 /* Products */,
@@ -246,11 +267,9 @@
 				D8900C5F2079E0CF00DCE64D /* API */,
 				D8A569412077CFAA004F9262 /* AppDelegate.swift */,
 				D8471CDD209915810038CBEB /* Main.storyboard */,
-				D82532A4209CD85B0014DF8B /* Storyboarded.swift */,
 				D8A569482077CFAB004F9262 /* Assets.xcassets */,
 				D8A5694A2077CFAB004F9262 /* LaunchScreen.storyboard */,
 				D8A5694D2077CFAB004F9262 /* Info.plist */,
-				D8C5369120AFBD19001EF3E0 /* InfiniteScrollable.swift */,
 			);
 			path = "Movie Night";
 			sourceTree = "<group>";
@@ -291,6 +310,7 @@
 				D8A5693A2077CFAA004F9262 /* Sources */,
 				D8A5693B2077CFAA004F9262 /* Frameworks */,
 				D8A5693C2077CFAA004F9262 /* Resources */,
+				D806235920DAC11F00B84761 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -382,7 +402,6 @@
 				D8900C702079E79300DCE64D /* Keyword.swift in Sources */,
 				D8900C642079E25500DCE64D /* Movie.swift in Sources */,
 				D8B2B77920CF54A5005F7D76 /* PhotoDownloader.swift in Sources */,
-				D8C5369220AFBD19001EF3E0 /* InfiniteScrollable.swift in Sources */,
 				D82532A3209CD7930014DF8B /* Coordinator.swift in Sources */,
 				D82532A5209CD85B0014DF8B /* Storyboarded.swift in Sources */,
 				D8900C662079E48900DCE64D /* Company.swift in Sources */,
@@ -395,6 +414,7 @@
 				D81B83F420AA470600506DC5 /* GenreListDataSource.swift in Sources */,
 				D8421D37207D21D5001DA0FE /* APIError.swift in Sources */,
 				D8900C6A2079E67500DCE64D /* Person.swift in Sources */,
+				D806235B20DAE70100B84761 /* MovieGoer.swift in Sources */,
 				D8361BEF20D3671D00967B71 /* UIImageView+Extension.swift in Sources */,
 				D8A569422077CFAA004F9262 /* AppDelegate.swift in Sources */,
 				D81B83FA20AA7E4700506DC5 /* ActorCollectionCell.swift in Sources */,
@@ -589,6 +609,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B7ES5QUQAV;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Movie Night/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -607,6 +631,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B7ES5QUQAV;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Movie Night/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
