@@ -9,36 +9,41 @@
 import UIKit
 
 class MainCoordinator: Coordinator {
-    var childCoordinators = [Coordinator]()
-    var navigationController: UINavigationController
+  var childCoordinators = [Coordinator]()
+  var navigationController: UINavigationController
 
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
-    }
+  init(navigationController: UINavigationController) {
+    self.navigationController = navigationController
+  }
 
-    func start() {
-        let vc = TestViewController.instantiate()
-        vc.coordinator = self
-        navigationController.pushViewController(vc, animated: false)
-    }
+  func start() {
+    let vc = TestViewController.instantiate()
+    vc.coordinator = self
+    navigationController.pushViewController(vc, animated: false)
+  }
 
-    @objc func selectMovies() {
-        let vc = MovieViewController.instantiate()
-        vc.coordinator = self
-        navigationController.pushViewController(vc, animated: true)
-    }
+  @objc func selectMovies() {
+    let vc = MovieViewController.instantiate()
+    vc.coordinator = self
+    navigationController.pushViewController(vc, animated: true)
+  }
 
-    @objc func selectGenres() {
-        let vc = GenreViewController.instantiate()
-        vc.coordinator = self
-        navigationController.pushViewController(vc, animated: true)
-    }
+  @objc func selectGenres() {
+    let vc = GenreViewController.instantiate()
+    vc.coordinator = self
+    navigationController.pushViewController(vc, animated: true)
+  }
 
-    @objc func selectActors() {
-        let vc = ActorCollectionController.instantiate()
-        vc.coordinator = self
-        navigationController.pushViewController(vc, animated: true)
-    }
+  @objc func selectActors() {
+    let vc = ActorCollectionController.instantiate()
+    vc.coordinator = self
+    navigationController.pushViewController(vc, animated: true)
+  }
+
+  @objc func saveUser() {
+//    start()
+    navigationController.popToRootViewController(animated: true)
+  }
 
 }
 
