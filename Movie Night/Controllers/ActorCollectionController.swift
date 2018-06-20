@@ -63,13 +63,13 @@ class ActorCollectionController: UICollectionViewController, Storyboarded {
 
 }
 
-extension ActorCollectionController: UICollectionViewDelegateFlowLayout {
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    let width = (collectionView.frame.width - 10) / 2
-    let height = width + 25
-    return CGSize(width: width, height: height)
-  }
-}
+//extension ActorCollectionController: UICollectionViewDelegateFlowLayout {
+//  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//    let width = (collectionView.frame.width - 10) / 2
+//    let height = width + 25
+//    return CGSize(width: width, height: height)
+//  }
+//}
 
 extension ActorCollectionController: UICollectionViewDataSourcePrefetching {
 

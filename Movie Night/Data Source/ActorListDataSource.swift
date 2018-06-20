@@ -34,10 +34,9 @@ class ActorListDataSource: NSObject, UICollectionViewDataSource {
     } else {
       let actorCell = collectionView.dequeueReusableCell(withReuseIdentifier: ActorCollectionCell.reuseIdentifier, for: indexPath) as! ActorCollectionCell
       let actor = actors[indexPath.row]
+      actorCell.photo.image = UIImage(named: "Default")
       actorCell.configure(with: actor)
-      if actor.imageState == .placeholder {
-        downloadProfilePhoto(for: actor, at: indexPath)
-      }
+
       return actorCell
     }
 
@@ -49,26 +48,6 @@ class ActorListDataSource: NSObject, UICollectionViewDataSource {
 
   private func isLoadingIndex(_ indexPath: IndexPath) -> Bool {
     return indexPath.row >= actors.count
-  }
-
-  private func downloadProfilePhoto(for actor: Person, at indexPath: IndexPath) {
-    if let _ = pendingOperations.downloadsInProgress[indexPath] {
-      return
-    }
-
-    let downloader = ActorPhotoDownloader(with: actor)
-    downloader.completionBlock = {
-      if downloader.isCancelled {
-        return
-      }
-      DispatchQueue.main.async {
-        self.pendingOperations.downloadsInProgress.removeValue(forKey: indexPath)
-        self.collectionView.reloadItems(at: [indexPath])
-      }
-    }
-    pendingOperations.downloadsInProgress[indexPath] = downloader
-    pendingOperations.downloadQueue.addOperation(downloader)
-    print(pendingOperations.downloadQueue.operationCount)
   }
 
 }

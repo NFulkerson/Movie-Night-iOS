@@ -22,7 +22,10 @@ class ActorCollectionCell: UICollectionViewCell {
 
   func configure(with actor: Person) {
     self.actor = actor
-    self.photo.image = actor.photo ?? UIImage(named: "Default")!
+    guard let url = actor.imageURLPath else {
+      return
+    }
+    self.photo.loadImage(from: url, placeholder: UIImage(named: "Default"))
   }
 
 }

@@ -14,8 +14,7 @@ enum Gender: Int, Decodable {
     case male = 2
 }
 
-class Person: Decodable {
-    var imageState: ImageState = .placeholder
+struct Person: Decodable {
 
     var imageURLPath: URL? {
         guard let path = profilePath else {
@@ -29,7 +28,6 @@ class Person: Decodable {
     let profilePath: String?
     let biography: String?
     let gender: Gender?
-    var photo: UIImage?
 
     private enum CodingKeys: String, CodingKey {
         case id
