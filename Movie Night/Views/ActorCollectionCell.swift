@@ -7,12 +7,29 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ActorCollectionCell: UICollectionViewCell {
   static let reuseIdentifier: String = "ActorCell"
   
   @IBOutlet weak var actorLabel: UILabel!
   @IBOutlet weak var photo: UIImageView!
+
+  override var isSelected: Bool {
+    didSet {
+      if isSelected {
+        UIView.animate(withDuration: 0.8) {
+          self.layer.borderWidth = 3
+          self.layer.borderColor = UIColor.blue.cgColor
+        }
+      } else {
+        UIView.animate(withDuration: 0.8) {
+          self.layer.borderWidth = 0
+          self.layer.borderColor = UIColor.clear.cgColor
+        }
+      }
+    }
+  }
 
   var actor: Person? {
     didSet {
@@ -25,7 +42,7 @@ class ActorCollectionCell: UICollectionViewCell {
     guard let url = actor.imageURLPath else {
       return
     }
-    self.photo.loadImage(from: url, placeholder: UIImage(named: "Default"))
+    self.photo.kf.setImage(with: url)
   }
 
 }
