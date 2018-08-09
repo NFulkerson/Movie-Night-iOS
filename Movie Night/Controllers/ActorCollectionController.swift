@@ -20,8 +20,10 @@ class ActorCollectionController: UICollectionViewController, Storyboarded {
   }()
 
   lazy var nextButton: UIBarButtonItem = {
-    return UIBarButtonItem(barButtonSystemItem: .done, target: coordinator, action: #selector(MainCoordinator.selectMovies))
+    return UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(nextStep))
   }()
+
+  var selected: [Person] = []
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -39,6 +41,10 @@ class ActorCollectionController: UICollectionViewController, Storyboarded {
   @objc func refreshList() {
     currentPage = 1
     getActors(refresh: true)
+  }
+
+  @objc func nextStep() {
+    coordinator?.userDidFinishPickingActors(selected)
   }
 
   private func getActors(refresh: Bool = false) {
@@ -60,7 +66,8 @@ class ActorCollectionController: UICollectionViewController, Storyboarded {
   }
 
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    print("Cell tapped at \(indexPath.row)")
+    let item = dataSource.actors[indexPath.row]
+    selected.append(item)
 
     if navigationItem.rightBarButtonItem == nil {
       navigationItem.rightBarButtonItem = nextButton
@@ -68,6 +75,10 @@ class ActorCollectionController: UICollectionViewController, Storyboarded {
   }
 
   override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+    let item = dataSource.actors[indexPath.row]
+    if let index = selected.index(of: item) {
+      selected.remove(at: index)
+    }
 
     if collectionView.indexPathsForSelectedItems == nil || collectionView.indexPathsForSelectedItems?.count == 0 {
       navigationItem.rightBarButtonItem = nil

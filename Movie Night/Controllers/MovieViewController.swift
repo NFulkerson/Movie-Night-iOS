@@ -21,8 +21,10 @@ class MovieViewController: UICollectionViewController, Storyboarded {
   }()
 
   lazy var submitButton: UIBarButtonItem = {
-    return UIBarButtonItem(barButtonSystemItem: .done, target: coordinator, action: #selector(MainCoordinator.saveUser))
+    return UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(finish))
   }()
+
+  var selected: [Movie] = []
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -30,16 +32,23 @@ class MovieViewController: UICollectionViewController, Storyboarded {
     collectionView?.dataSource = dataSource
     collectionView?.delegate = self
     collectionView?.prefetchDataSource = self
+    let layout = PageCollectionLayout(itemSize: CGSize(width: 256, height: 460))
+    collectionView?.setCollectionViewLayout(layout, animated: true)
     collectionView?.allowsMultipleSelection = true
 
     collectionView?.refreshControl = UIRefreshControl()
     collectionView?.refreshControl?.addTarget(self, action: #selector(refreshList), for: .valueChanged)
     getMovies()
+
   }
 
   @objc func refreshList() {
     currentPage = 1
     getMovies(refresh: true)
+  }
+
+  @objc func finish() {
+    coordinator?.userDidFinishPickingMovies(selected)
   }
 
   func getMovies(refresh: Bool = false) {
@@ -58,7 +67,8 @@ class MovieViewController: UICollectionViewController, Storyboarded {
   }
 
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    print("Cell tapped at \(indexPath.row)")
+    let item = dataSource.movies[indexPath.row]
+    selected.append(item)
 
     if navigationItem.rightBarButtonItem == nil {
       navigationItem.rightBarButtonItem = submitButton
@@ -66,6 +76,10 @@ class MovieViewController: UICollectionViewController, Storyboarded {
   }
 
   override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+    let item = dataSource.movies[indexPath.row]
+    if let deselectedIndex = selected.index(of: item) {
+      selected.remove(at: deselectedIndex)
+    }
 
     if collectionView.indexPathsForSelectedItems == nil || collectionView.indexPathsForSelectedItems?.count == 0 {
       navigationItem.rightBarButtonItem = nil

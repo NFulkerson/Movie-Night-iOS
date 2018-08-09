@@ -13,7 +13,7 @@ class GenreViewController: UICollectionViewController, Storyboarded {
   weak var coordinator: MainCoordinator?
 
   lazy var nextButton: UIBarButtonItem = {
-    return UIBarButtonItem(barButtonSystemItem: .done, target: coordinator, action: #selector(MainCoordinator.selectActors))
+    return UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(saveAndGoNext))
   }()
 
   var genreList: [Genre] = [] {
@@ -59,6 +59,16 @@ class GenreViewController: UICollectionViewController, Storyboarded {
 
   }
 
+  @objc func saveAndGoNext() {
+    guard let favorites: [Genre] = collectionView?.indexPathsForSelectedItems?.map({ genreList[$0.row] }) else {
+      print("Didn't save genres")
+      return
+    }
+
+    coordinator?.userDidFinishPickingGenres(favorites)
+  }
+
+
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     print("Cell tapped at \(indexPath.row)")
 
@@ -73,7 +83,6 @@ class GenreViewController: UICollectionViewController, Storyboarded {
       navigationItem.rightBarButtonItem = nil
     }
   }
-
   
 }
 

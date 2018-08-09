@@ -19,6 +19,11 @@ class MovieListDataSource: NSObject, UICollectionViewDataSource {
     super.init()
   }
 
+  init(collectionView: UICollectionView, data: [Movie]) {
+    self.collectionView = collectionView
+    
+  }
+
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return movies.count
   }

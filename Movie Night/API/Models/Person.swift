@@ -9,54 +9,64 @@
 import UIKit
 
 enum Gender: Int, Codable {
-    case unset = 0
-    case female = 1
-    case male = 2
+  case unset = 0
+  case female = 1
+  case male = 2
 }
 
 struct Person: Codable {
 
-    var imageURLPath: URL? {
-        guard let path = profilePath else {
-            return nil
-        }
-        return URL(string: "https://image.tmdb.org/t/p/w185/\(path)")
+  var imageURLPath: URL? {
+    guard let path = profilePath else {
+      return nil
     }
+    return URL(string: "https://image.tmdb.org/t/p/w185/\(path)")
+  }
 
-    let id: Int
-    let name: String
-    let profilePath: String?
-    let biography: String?
-    let gender: Gender?
+  let id: Int
+  let name: String
+  let profilePath: String?
+  let biography: String?
+  let gender: Gender?
 
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case profilePath
-        case biography
-        case gender
-    }
-
+  private enum CodingKeys: String, CodingKey {
+    case id
+    case name
+    case profilePath
+    case biography
+    case gender
+  }
 }
+
+extension Person: Hashable {
+  var hashValue: Int {
+    return id.hashValue
+  }
+
+  static func == (lhs: Person, rhs: Person) -> Bool {
+    return lhs.id == rhs.id
+  }
+}
+
 // fodder for generic
 struct PersonContainer: Decodable {
-    let page: Int
-    let results: [Person]
-    let totalResults: Int
-    let totalPages: Int
+  let page: Int
+  let results: [Person]
+  let totalResults: Int
+  let totalPages: Int
 }
 
 struct GetPopularActors: APIRequest {
-    typealias Response = PersonContainer
+  typealias Response = PersonContainer
 
-    var resourceName: String {
-        return "person/popular"
-    }
-    var parameters: [URLQueryItem] = []
+  var resourceName: String {
+    return "person/popular"
+  }
+  var parameters: [URLQueryItem] = []
 }
 
 extension GetPopularActors {
-    init(page: Int) {
-        parameters.append(URLQueryItem(name: "page", value: "\(page)"))
-    }
+  init(page: Int) {
+    parameters.append(URLQueryItem(name: "page", value: "\(page)"))
+  }
 }
