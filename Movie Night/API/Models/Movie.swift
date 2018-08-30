@@ -20,6 +20,21 @@ struct Movie: Codable {
   let popularity: Double?
   let posterPath: String?
 
+  var releaseYear: String {
+    let dateFormat = "yyyy-MM-dd"
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = dateFormat
+
+    guard let release = releaseDate,
+      let date = dateFormatter.date(from: release) else {
+      return "Unknown"
+    }
+
+    let calendar = Calendar.current
+    let year = calendar.component(.year, from: date)
+    return "\(year)"
+  }
+
   let releaseDate: String?
   let title: String?
 
@@ -30,7 +45,7 @@ struct Movie: Codable {
     guard let path = posterPath else {
       return nil
     }
-    return URL(string: "https://image.tmdb.org/t/p/w185/\(path)")
+    return URL(string: "https://image.tmdb.org/t/p/w500/\(path)")
   }
 
   private enum CodingKeys: String, CodingKey {
@@ -39,6 +54,7 @@ struct Movie: Codable {
     case belongsToCollection
     case overview
     case popularity
+    case genres
     case posterPath
     case releaseDate
     case title
