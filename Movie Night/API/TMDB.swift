@@ -38,9 +38,7 @@ class TMDBClient: APIClient {
   func send<T: APIRequest>(_ request: T, completion: @escaping (Result<T.Response>) -> Void) {
     let endpoint = self.endpoint(for: request)
     let request = URLRequest(url: endpoint)
-    print(request.url)
     let task = session.dataTask(with: request) { (data, response, error) in
-      print("Session response: \(response?.description)")
       if let data = data {
         do {
           let decoder = JSONDecoder()
@@ -53,7 +51,6 @@ class TMDBClient: APIClient {
           completion(.failure)
         }
       } else {
-        print("No data")
         completion(.failure)
       }
     }
@@ -66,12 +63,11 @@ class TMDBClient: APIClient {
     guard var urlComponents = URLComponents(string: apiBase) else {
       return URL(string: "https://api.themoviedb.org")!
     }
+    
     urlComponents.path = "/3/\(request.resourceName)"
 
     urlComponents.queryItems = request.parameters
     urlComponents.queryItems?.append(URLQueryItem(name: "api_key", value: apikey))
-
-    print("Query Items: \(urlComponents.queryItems)")
 
     return urlComponents.url!
 

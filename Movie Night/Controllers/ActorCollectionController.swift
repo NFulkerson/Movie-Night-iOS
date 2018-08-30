@@ -4,7 +4,6 @@
 //
 //  Created by Nathan on 5/14/18.
 //  Copyright © 2018 Nathan Fulkerson. All rights reserved.
-//
 
 import UIKit
 
@@ -20,9 +19,15 @@ class ActorCollectionController: UICollectionViewController, Storyboarded {
     return ActorListDataSource(collectionView: self.collectionView!)
   }()
 
+  lazy var nextButton: UIBarButtonItem = {
+    return UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(nextStep))
+  }()
+
+  var selected: [Person] = []
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationController?.title = "Favorite Actors"
+
     collectionView?.dataSource = dataSource
     collectionView?.delegate = self
     collectionView?.prefetchDataSource = self
@@ -30,13 +35,16 @@ class ActorCollectionController: UICollectionViewController, Storyboarded {
 
     collectionView?.refreshControl = UIRefreshControl()
     collectionView?.refreshControl?.addTarget(self, action: #selector(refreshList), for: .valueChanged)
-
     getActors()
   }
 
   @objc func refreshList() {
     currentPage = 1
     getActors(refresh: true)
+  }
+
+  @objc func nextStep() {
+    coordinator?.userDidFinishPickingActors(selected)
   }
 
   private func getActors(refresh: Bool = false) {
@@ -58,18 +66,25 @@ class ActorCollectionController: UICollectionViewController, Storyboarded {
   }
 
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    debugPrint("Tippy tappy.")
+    let item = dataSource.actors[indexPath.row]
+    selected.append(item)
+
+    if navigationItem.rightBarButtonItem == nil {
+      navigationItem.rightBarButtonItem = nextButton
+    }
   }
 
-}
+  override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+    let item = dataSource.actors[indexPath.row]
+    if let index = selected.index(of: item) {
+      selected.remove(at: index)
+    }
 
-//extension ActorCollectionController: UICollectionViewDelegateFlowLayout {
-//  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//    let width = (collectionView.frame.width - 10) / 2
-//    let height = width + 25
-//    return CGSize(width: width, height: height)
-//  }
-//}
+    if collectionView.indexPathsForSelectedItems == nil || collectionView.indexPathsForSelectedItems?.count == 0 {
+      navigationItem.rightBarButtonItem = nil
+    }
+  }
+}
 
 extension ActorCollectionController: UICollectionViewDataSourcePrefetching {
 

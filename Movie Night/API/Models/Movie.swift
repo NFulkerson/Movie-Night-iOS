@@ -8,84 +8,155 @@
 
 import UIKit
 
-enum ImageState {
-    case placeholder
-    case downloaded
-    case failed
-}
+struct Movie: Codable {
 
-class Movie: Decodable {
-    var imageState: ImageState = .placeholder
-    let id: Int
+  let id: Int
 
-    let backdropPath: String
-    let belongsToCollection: Bool?
-    let genres: [Genre]
+  let backdropPath: String?
+  let belongsToCollection: Bool?
+  let genres: [Genre] = []
 
-    let overview: String?
-    let popularity: Double
-    let posterPath: String?
+  let overview: String?
+  let popularity: Double?
+  let posterPath: String?
 
-    let releaseDate: String
-    let runtime: Int
+  var releaseYear: String {
+    let dateFormat = "yyyy-MM-dd"
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = dateFormat
 
-    let tagline: String
-    let title: String
-
-    let voteAverage: Double
-    let voteCount: Int
-
-    var image: UIImage?
-
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case backdropPath
-        case belongsToCollection
-        case genres
-        case overview
-        case popularity
-        case posterPath
-        case releaseDate
-        case runtime
-        case tagline
-        case title
-        case voteAverage
-        case voteCount
+    guard let release = releaseDate,
+      let date = dateFormatter.date(from: release) else {
+      return "Unknown"
     }
 
+    let calendar = Calendar.current
+    let year = calendar.component(.year, from: date)
+    return "\(year)"
+  }
+
+  let releaseDate: String?
+  let title: String?
+
+  let voteAverage: Double?
+  let voteCount: Int?
+
+  var imageURLPath: URL? {
+    guard let path = posterPath else {
+      return nil
+    }
+    return URL(string: "https://image.tmdb.org/t/p/w500/\(path)")
+  }
+
+  private enum CodingKeys: String, CodingKey {
+    case id
+    case backdropPath
+    case belongsToCollection
+    case overview
+    case popularity
+    case genres
+    case posterPath
+    case releaseDate
+    case title
+    case voteAverage
+    case voteCount
+  }
+
+}
+
+extension Movie: Hashable {
+  var hashValue: Int {
+    return self.id.hashValue
+  }
+
+  static func == (lhs: Movie, rhs: Movie) -> Bool {
+    return lhs.id == rhs.id
+  }
 }
 
 // MARK: Movie-related endpoints
 
 struct GetMovieDetails: APIRequest {
-    typealias Response = Movie
+  typealias Response = Movie
 
-    var resourceName: String {
-        return "movie/\(movieId)"
-    }
+  var resourceName: String {
+    return "movie/\(movieId)"
+  }
 
-    var parameters: [URLQueryItem] = []
+  var parameters: [URLQueryItem] = []
 
-    let movieId: Int
+  let movieId: Int
 
-    init(id: Int) {
-        movieId = id
-    }
+  init(id: Int) {
+    movieId = id
+  }
 }
 
 struct GetPopularMovies: APIRequest {
-    typealias Response = ListContainer
+  typealias Response = ListContainer
 
-    var resourceName: String {
-        return "movie/popular"
+  var resourceName: String {
+    return "movie/popular"
+  }
+
+  var parameters: [URLQueryItem] = []
+}
+
+enum RecommendationType {
+  case recommended
+  case similar
+}
+
+struct RecommendedMovies: APIRequest {
+  typealias Response = ListContainer
+
+  let listType: RecommendationType
+
+  var resourceName: String {
+    switch listType {
+    case .recommended:
+      return "movie/\(movieId)/recommendations"
+    case .similar:
+      return "movie/\(movieId)/similar"
     }
+  }
 
-    var parameters: [URLQueryItem] = []
+  var parameters: [URLQueryItem] = []
+  let movieId: Int
+
+  init(id: Int, list: RecommendationType) {
+    movieId = id
+    listType = list
+  }
+}
+
+struct DiscoverMovies: APIRequest {
+  typealias Response = ListContainer
+
+  var resourceName: String {
+    return "discover/movie"
+  }
+
+  var parameters: [URLQueryItem] = []
+
+  mutating func with(people: [Person]) {
+    let uniqueIds = Set<Int>(people.map({ $0.id }))
+    let idList = Array<Int>(uniqueIds).map({ "\($0)" }).joined(separator: "|")
+    let queryItem = URLQueryItem(name: "with_people", value: idList)
+    parameters.append(queryItem)
+  }
+
+  mutating func with(genres: [Genre]) {
+    let uniqueIds = Set<Int>(genres.map({ $0.id }))
+    let idList = Array<Int>(uniqueIds).map({ "\($0)" }).joined(separator: "|")
+    let queryItem = URLQueryItem(name: "with_genres", value: idList)
+    parameters.append(queryItem)
+  }
 }
 
 struct ListContainer: Decodable {
-    let page: Int
-    let totalPages: Int
-    let totalResults: Int
-    let results: [Movie]
+  let page: Int
+  let totalPages: Int
+  let totalResults: Int
+  let results: [Movie]
 }

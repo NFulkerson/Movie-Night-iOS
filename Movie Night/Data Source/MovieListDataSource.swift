@@ -10,35 +10,28 @@ import UIKit
 
 class MovieListDataSource: NSObject, UICollectionViewDataSource {
   var movies: [Movie] = []
-  var totalMovies: Int = 0
-  let collectionView: UICollectionView
-
-  init(collectionView: UICollectionView) {
-    self.collectionView = collectionView
-    collectionView.register(LoadingCollectionViewCell.self, forCellWithReuseIdentifier: "loadingCell")
-    super.init()
-  }
+//  var totalMovies: Int = 0
 
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return totalMovies
+    return movies.count
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    if isLoadingIndex(indexPath) {
-      let loadingCell = collectionView.dequeueReusableCell(withReuseIdentifier: "loadingCell", for: indexPath) as! LoadingCollectionViewCell
-      return loadingCell
-    } else {
-      let movieCell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCollectionCell.reuseIdentifier, for: indexPath) as! MovieCollectionCell
-      let movie = movies[indexPath.row]
-      movieCell.configure(with: movie)
+    let movieCell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieSelectionCell.reuseIdentifier, for: indexPath) as! MovieSelectionCell
+    let movie = movies[indexPath.row]
+    movieCell.posterView.image = UIImage(named: "Default")
+    movieCell.configure(with: movie)
 
-      return movieCell
-    }
+    return movieCell
+  }
+
+  func update(with films: [Movie]) {
+    self.movies = films
+    print("Updated films")
   }
 
   private func isLoadingIndex(_ indexPath: IndexPath) -> Bool {
     return indexPath.row >= movies.count
   }
 
-  
 }

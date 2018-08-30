@@ -8,82 +8,76 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
 class MovieViewController: UICollectionViewController, Storyboarded {
 
-    weak var coordinator: MainCoordinator?
+  weak var coordinator: MainCoordinator?
+  let client = TMDBClient()
+  var presentingSuggestions: Bool = false
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        navigationController?.title = "Favorite Movies"
+  private var isFetchingNextPage: Bool = false
+  private var currentPage: Int = 1
+  
+  var dataSource: MovieListDataSource = MovieListDataSource()
+
+  lazy var submitButton: UIBarButtonItem = {
+    return UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(finish))
+  }()
+
+  var selected: [Movie] = []
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    collectionView?.register(UINib(nibName: "MovieSelectionCell", bundle: nil), forCellWithReuseIdentifier: "MovieCell")
+    collectionView?.dataSource = dataSource
+    collectionView?.delegate = self
+    print("Hi, I am \(self). My datasource is \(dataSource)")
+    let layout = PageCollectionLayout(itemSize: CGSize(width: 256, height: 460))
+    collectionView?.setCollectionViewLayout(layout, animated: true)
+    collectionView?.allowsMultipleSelection = true
+
+  }
+
+  @objc func finish() {
+    coordinator?.userDidFinishPickingMovies(selected)
+  }
+
+  func getMovies() {
+
+    client.send(GetPopularMovies()) { (result) in
+      DispatchQueue.main.async {
+        switch result {
+        case .success(let movies):
+          self.update(with: movies.results)
+        case .failure:
+          return
+        }
+      }
+    }
+  }
+
+  func update(with movies: [Movie]) {
+    dataSource.update(with: movies)
+    collectionView?.reloadData()
+  }
+
+  override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let item = dataSource.movies[indexPath.row]
+    selected.append(item)
+
+    if navigationItem.rightBarButtonItem == nil {
+      navigationItem.rightBarButtonItem = submitButton
+    }
+  }
+
+  override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+    let item = dataSource.movies[indexPath.row]
+    if let deselectedIndex = selected.index(of: item) {
+      selected.remove(at: deselectedIndex)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    if collectionView.indexPathsForSelectedItems == nil || collectionView.indexPathsForSelectedItems?.count == 0 {
+      navigationItem.rightBarButtonItem = nil
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    // MARK: UICollectionViewDataSource
-
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        // Configure the cell
-    
-        return cell
-    }
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
-
+  }
 }
+

@@ -12,11 +12,8 @@ class ActorListDataSource: NSObject, UICollectionViewDataSource {
   var actors: [Person] = []
   var totalActors: Int = 0
   let collectionView: UICollectionView
-  let pendingOperations = PendingOperations()
-  let cache = NSCache<NSString, UIImage>()
 
   init(collectionView: UICollectionView) {
-
     self.collectionView = collectionView
     collectionView.register(LoadingCollectionViewCell.self, forCellWithReuseIdentifier: "loadingCell")
     super.init()
@@ -39,7 +36,6 @@ class ActorListDataSource: NSObject, UICollectionViewDataSource {
 
       return actorCell
     }
-
   }
 
   func update(with actors: [Person]) {

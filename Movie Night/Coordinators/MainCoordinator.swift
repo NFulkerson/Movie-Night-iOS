@@ -9,36 +9,96 @@
 import UIKit
 
 class MainCoordinator: Coordinator {
-    var childCoordinators = [Coordinator]()
-    var navigationController: UINavigationController
+  var childCoordinators = [Coordinator]()
+  var navigationController: UINavigationController
 
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
-    }
+  lazy var userCoordinator = UserDataCoordinator()
+  let client = TMDBClient()
 
-    func start() {
-        let vc = TestViewController.instantiate()
-        vc.coordinator = self
-        navigationController.pushViewController(vc, animated: false)
-    }
+  weak var delegate: UserFlowDelegate?
 
-    @objc func selectMovies() {
-        let vc = MovieViewController.instantiate()
-        vc.coordinator = self
-        navigationController.pushViewController(vc, animated: true)
-    }
+  init(navigationController: UINavigationController) {
+    self.navigationController = navigationController
+  }
 
-    @objc func selectGenres() {
-        let vc = GenreViewController.instantiate()
-        vc.coordinator = self
-        navigationController.pushViewController(vc, animated: true)
-    }
+  func start() {
+    let vc = MenuViewController.instantiate()
+    vc.coordinator = self
+    navigationController.pushViewController(vc, animated: false)
+  }
 
-    @objc func selectActors() {
-        let vc = ActorCollectionController.instantiate()
-        vc.coordinator = self
-        navigationController.pushViewController(vc, animated: true)
+  @objc func selectMovies() {
+    let vc = MovieViewController.instantiate()
+    vc.coordinator = self
+    vc.getMovies()
+    navigationController.pushViewController(vc, animated: true)
+  }
+
+  @objc func selectGenres() {
+    let vc = GenreViewController.instantiate()
+    vc.coordinator = self
+    navigationController.pushViewController(vc, animated: true)
+  }
+
+  @objc func selectActors() {
+    let vc = ActorCollectionController.instantiate()
+    vc.coordinator = self
+    navigationController.pushViewController(vc, animated: true)
+  }
+
+  @objc func findSuggestedFilms() {
+    let decisionMaker = DecisionEngine(with: client, coordinator: self)
+    let combined = userCoordinator.firstUser.favoriteMovies + userCoordinator.secondUser.favoriteMovies
+    decisionMaker.findSuggestions(for: userCoordinator.firstUser, and: userCoordinator.secondUser)
+  }
+
+  func presentSuggestions(_ movies: [Movie]) {
+    debugPrint("Presenting suggestions!")
+    let vc = MovieViewController.instantiate()
+    vc.coordinator = self
+    vc.title = "Suggested Movies"
+    vc.update(with: movies)
+    self.navigationController.pushViewController(vc, animated: true)
+  }
+
+  func finish() {
+    navigationController.popToRootViewController(animated: true)
+  }
+
+}
+
+extension MainCoordinator: UserFlowDelegate {
+  func userDidStartPickingFavorites(_ user: User) {
+    userCoordinator.currentUser = user
+    selectGenres()
+  }
+
+  func userDidFinishPickingMovies(_ movies: [Movie]) {
+    userCoordinator.update(with: movies)
+
+    guard let user = userCoordinator.currentUser else {
+      finish()
+      return
     }
+    switch user {
+    case .first:
+      userCoordinator.firstUserComplete = true
+    case .second:
+      userCoordinator.secondUserComplete = true
+    }
+    finish()
+    
+  }
+
+  func userDidFinishPickingGenres(_ genres: [Genre]) {
+    userCoordinator.update(with: genres)
+    selectActors()
+  }
+
+  func userDidFinishPickingActors(_ actors: [Person]) {
+    userCoordinator.update(with: actors)
+    selectMovies()
+  }
 
 }
 

@@ -12,41 +12,28 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Movie View Controller-->
+        <!--Favorite Movies-->
         <scene sceneID="lHt-DB-SoQ">
             <objects>
-                <collectionViewController storyboardIdentifier="MovieViewController" id="Jcr-Bb-Pqb" customClass="MovieViewController" customModule="Movie_Night" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="MovieViewController" title="Favorite Movies" id="Jcr-Bb-Pqb" customClass="MovieViewController" customModule="Movie_Night" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="QWz-DY-hw3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.47843137250000001" green="0.80784313730000001" blue="0.34492187499999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dN6-5Y-0kD">
-                            <size key="itemSize" width="50" height="50"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" sectionInsetReference="safeArea" id="dN6-5Y-0kD">
+                            <size key="itemSize" width="185" height="300"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="sectionInset" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieCell" id="1aD-8s-d4q" customClass="MovieCollectionCell" customModule="Movie_Night" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="85" height="85"/>
+                                <rect key="frame" x="4" y="133.5" width="256" height="420"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="85" height="85"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="256" height="420"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KJU-HR-EjP">
-                                            <rect key="frame" x="21.5" y="32" width="42" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
                                 </view>
-                                <constraints>
-                                    <constraint firstItem="KJU-HR-EjP" firstAttribute="centerX" secondItem="1aD-8s-d4q" secondAttribute="centerX" id="MI0-WG-KCd"/>
-                                    <constraint firstItem="KJU-HR-EjP" firstAttribute="centerY" secondItem="1aD-8s-d4q" secondAttribute="centerY" id="dhb-uv-bkT"/>
-                                </constraints>
-                                <size key="customSize" width="85" height="85"/>
+                                <size key="customSize" width="256" height="420"/>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -57,12 +44,12 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N0W-6Z-0I5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1913" y="241"/>
+            <point key="canvasLocation" x="1912.8" y="240.62968515742131"/>
         </scene>
-        <!--Test View Controller-->
+        <!--Menu View Controller-->
         <scene sceneID="iJN-kJ-I9t">
             <objects>
-                <viewController storyboardIdentifier="TestViewController" id="iHF-Wu-jSB" customClass="TestViewController" customModule="Movie_Night" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MenuViewController" id="iHF-Wu-jSB" customClass="MenuViewController" customModule="Movie_Night" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iAe-a3-G7r">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -73,66 +60,75 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mst3k" translatesAutoresizingMaskIntoConstraints="NO" id="lBR-0C-sYi">
                                 <rect key="frame" x="0.0" y="553" width="375" height="114"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NWZ-TX-79c">
-                                <rect key="frame" x="65" y="229" width="245" height="59"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="NWZ-TX-79c">
+                                <rect key="frame" x="65" y="213.5" width="245" height="59"/>
                                 <color key="backgroundColor" red="0.70196078429999997" green="0.29582487969999999" blue="0.28182019339999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="NWZ-TX-79c" secondAttribute="height" multiplier="25:6" id="MMb-gH-mcc"/>
-                                    <constraint firstAttribute="height" constant="59" id="TRY-sV-bL3"/>
                                 </constraints>
-                                <state key="normal" title="Spectator 1">
+                                <inset key="titleEdgeInsets" minX="-80" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="User One Favorites" image="Attention">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="presentGenreVC:" destination="iHF-Wu-jSB" eventType="touchUpInside" id="y3Y-67-TP2"/>
+                                    <action selector="userOneTapped:" destination="iHF-Wu-jSB" eventType="touchUpInside" id="Bsb-ep-wAj"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="slX-UV-pfZ">
-                                <rect key="frame" x="65" y="304" width="245" height="59"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rta-8F-ySk">
+                                <rect key="frame" x="65.5" y="304.5" width="245" height="59"/>
                                 <color key="backgroundColor" red="0.70196078429999997" green="0.29582487969999999" blue="0.28182019339999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="59" id="h5w-IG-bjZ"/>
-                                </constraints>
-                                <state key="normal" title="Spectator 2">
+                                <inset key="titleEdgeInsets" minX="-80" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="User Two Favorites" image="Attention">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="presentMovieVC:" destination="iHF-Wu-jSB" eventType="touchUpInside" id="BgV-15-yUt"/>
+                                    <action selector="userTwoTapped:" destination="iHF-Wu-jSB" eventType="touchUpInside" id="kgC-dX-Iq1"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CXT-hg-WKO">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="CXT-hg-WKO">
                                 <rect key="frame" x="65" y="454" width="245" height="59"/>
                                 <color key="backgroundColor" red="0.70196078429999997" green="0.29582487969999999" blue="0.28182019339999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="59" id="A6f-x8-uQ9"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="See Results">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <state key="disabled" title="Select Favorites to See Results"/>
+                                <connections>
+                                    <action selector="seeResultsTapped:" destination="iHF-Wu-jSB" eventType="touchUpInside" id="EJh-5d-gZg"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.70196078431372544" green="0.29411764705882354" blue="0.28235294117647058" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="NWZ-TX-79c" firstAttribute="leading" secondItem="6tC-uE-JCN" secondAttribute="leading" constant="65" id="1GH-Rx-O2a"/>
+                            <constraint firstItem="rta-8F-ySk" firstAttribute="top" secondItem="NWZ-TX-79c" secondAttribute="bottom" constant="32" id="2h9-hf-M4c"/>
                             <constraint firstItem="CXT-hg-WKO" firstAttribute="centerX" secondItem="iAe-a3-G7r" secondAttribute="centerX" id="4a2-vd-Ow0"/>
+                            <constraint firstItem="NWZ-TX-79c" firstAttribute="leading" secondItem="6tC-uE-JCN" secondAttribute="leading" constant="65" id="8Kl-bz-L7d"/>
                             <constraint firstItem="lBR-0C-sYi" firstAttribute="leading" secondItem="6tC-uE-JCN" secondAttribute="leading" id="A7G-h9-e3y"/>
                             <constraint firstItem="lBR-0C-sYi" firstAttribute="bottom" secondItem="6tC-uE-JCN" secondAttribute="bottom" id="BZK-Rw-TSL"/>
-                            <constraint firstItem="slX-UV-pfZ" firstAttribute="centerX" secondItem="iAe-a3-G7r" secondAttribute="centerX" id="CnQ-Pe-0hk"/>
                             <constraint firstItem="lBR-0C-sYi" firstAttribute="top" secondItem="CXT-hg-WKO" secondAttribute="bottom" constant="40" id="Div-kI-8S4"/>
+                            <constraint firstItem="NWZ-TX-79c" firstAttribute="centerX" secondItem="iAe-a3-G7r" secondAttribute="centerX" id="G7E-Kj-4oA"/>
                             <constraint firstItem="BBx-VY-56e" firstAttribute="leading" secondItem="6tC-uE-JCN" secondAttribute="leading" id="LEO-3w-VSL"/>
-                            <constraint firstItem="NWZ-TX-79c" firstAttribute="centerX" secondItem="iAe-a3-G7r" secondAttribute="centerX" id="MiQ-Bd-fa3"/>
-                            <constraint firstItem="slX-UV-pfZ" firstAttribute="width" secondItem="slX-UV-pfZ" secondAttribute="height" multiplier="25:6" id="N0z-2C-dK7"/>
+                            <constraint firstItem="rta-8F-ySk" firstAttribute="centerX" secondItem="iAe-a3-G7r" secondAttribute="centerX" id="Lsw-se-Tmj"/>
                             <constraint firstItem="lBR-0C-sYi" firstAttribute="trailing" secondItem="6tC-uE-JCN" secondAttribute="trailing" id="Nnz-Ac-Skb"/>
                             <constraint firstItem="6tC-uE-JCN" firstAttribute="bottom" secondItem="BBx-VY-56e" secondAttribute="bottom" id="PIP-uc-LfU"/>
+                            <constraint firstItem="6tC-uE-JCN" firstAttribute="trailing" secondItem="NWZ-TX-79c" secondAttribute="trailing" constant="65" id="PZ7-P7-o2J"/>
                             <constraint firstItem="CXT-hg-WKO" firstAttribute="width" secondItem="CXT-hg-WKO" secondAttribute="height" multiplier="25:6" id="THn-zh-aik"/>
-                            <constraint firstItem="6tC-uE-JCN" firstAttribute="trailing" secondItem="NWZ-TX-79c" secondAttribute="trailing" constant="65" id="fFw-n6-yKF"/>
+                            <constraint firstItem="rta-8F-ySk" firstAttribute="width" secondItem="NWZ-TX-79c" secondAttribute="width" id="cHh-LI-x6W"/>
+                            <constraint firstItem="rta-8F-ySk" firstAttribute="centerY" secondItem="iAe-a3-G7r" secondAttribute="centerY" id="dLr-VO-tnf"/>
+                            <constraint firstItem="rta-8F-ySk" firstAttribute="width" secondItem="rta-8F-ySk" secondAttribute="height" multiplier="25:6" id="fiK-d1-gWC"/>
                             <constraint firstItem="6tC-uE-JCN" firstAttribute="trailing" secondItem="BBx-VY-56e" secondAttribute="trailing" id="goZ-ku-Cbf"/>
-                            <constraint firstItem="slX-UV-pfZ" firstAttribute="top" secondItem="NWZ-TX-79c" secondAttribute="bottom" constant="16" id="hfN-kT-7d4"/>
                             <constraint firstItem="BBx-VY-56e" firstAttribute="top" secondItem="6tC-uE-JCN" secondAttribute="top" id="pCP-PZ-uGd"/>
-                            <constraint firstItem="BBx-VY-56e" firstAttribute="top" secondItem="NWZ-TX-79c" secondAttribute="bottom" constant="-268" id="ubl-JL-xEa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6tC-uE-JCN"/>
                     </view>
+                    <connections>
+                        <outlet property="seeResultsButton" destination="CXT-hg-WKO" id="8pW-Zd-59i"/>
+                        <outlet property="userOneButton" destination="NWZ-TX-79c" id="JZb-MY-Tk2"/>
+                        <outlet property="userTwoButton" destination="rta-8F-ySk" id="6LZ-3w-Qbo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XEB-Hc-hwQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -146,22 +142,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="JNx-Vk-WeU">
-                            <size key="itemSize" width="119" height="119"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" sectionInsetReference="safeArea" id="JNx-Vk-WeU">
+                            <size key="itemSize" width="136" height="180"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="sectionInset" minX="20" minY="20" maxX="20" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActorCell" id="HlK-yJ-9Rq" customClass="ActorCollectionCell" customModule="Movie_Night" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="120" height="160"/>
+                                <rect key="frame" x="20" y="20" width="120" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="120" height="160"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLY-Ez-kb8">
-                                            <rect key="frame" x="39" y="121" width="42" height="31"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="kLY-Ez-kb8">
+                                            <rect key="frame" x="10" y="121" width="100" height="31"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -181,6 +177,8 @@
                                     <constraint firstItem="KFU-xa-5dN" firstAttribute="leading" secondItem="HlK-yJ-9Rq" secondAttribute="leading" id="JBf-fx-V3I"/>
                                     <constraint firstAttribute="trailing" secondItem="KFU-xa-5dN" secondAttribute="trailing" id="UuW-Nn-mE4"/>
                                     <constraint firstItem="kLY-Ez-kb8" firstAttribute="top" secondItem="KFU-xa-5dN" secondAttribute="bottom" constant="1" id="coF-Ot-k43"/>
+                                    <constraint firstItem="kLY-Ez-kb8" firstAttribute="leading" secondItem="HlK-yJ-9Rq" secondAttribute="leadingMargin" constant="2" id="pqj-bZ-Psx"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="kLY-Ez-kb8" secondAttribute="trailing" constant="2" id="qOi-Yc-dhE"/>
                                 </constraints>
                                 <size key="customSize" width="120" height="160"/>
                                 <connections>
@@ -208,7 +206,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mhK-qr-yiL">
-                            <size key="itemSize" width="50" height="50"/>
+                            <size key="itemSize" width="140" height="140"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -221,7 +219,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="130" height="140"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6gg-nO-LZe">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="6gg-nO-LZe">
                                             <rect key="frame" x="8" y="119" width="114" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -262,6 +260,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Attention" width="88" height="88"/>
         <image name="Default" width="80" height="70"/>
         <image name="StageBG" width="375" height="812"/>
         <image name="mst3k" width="380" height="114"/>

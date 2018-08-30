@@ -9,16 +9,31 @@
 import UIKit
 
 class GenreCollectionCell: UICollectionViewCell {
-    static let reuseIdentifier: String = "GenreCell"
+  static let reuseIdentifier: String = "GenreCell"
 
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var genreLabel: UILabel!
+  @IBOutlet weak var imageView: UIImageView!
+  @IBOutlet weak var genreLabel: UILabel!
 
-    func configure(with genre: String) {
-//        imageView.image = UIImage(named: genre)
-        genreLabel.text = genre
-        imageView.image = UIImage(named: genre) ?? UIImage(named: "Default")
-        
+  override var isSelected: Bool {
+    didSet {
+      if isSelected {
+        UIView.animate(withDuration: 0.8) {
+          self.layer.borderWidth = 3
+          self.layer.borderColor = UIColor.blue.cgColor
+        }
+      } else {
+        UIView.animate(withDuration: 0.8) {
+          self.layer.borderWidth = 0
+          self.layer.borderColor = UIColor.clear.cgColor
+        }
+      }
     }
+  }
+
+  func configure(with genre: String) {
+    //        imageView.image = UIImage(named: genre)
+    genreLabel.text = genre
+    imageView.image = UIImage(named: genre) ?? UIImage(named: "Default")
+  }
 
 }
