@@ -37,11 +37,9 @@ class DecisionEngine {
       }
     }
 
-    movieDispatch.notify(queue: .main) {
+    movieDispatch.notify(queue: .main) { [weak self] in
       let uniquelySorted = Set<Movie>(similarMovies).sorted(by: { $0.title! < $1.title! })
-      for movie in uniquelySorted {
-        print(movie.title)
-      }
+      self?.coordinator?.presentSuggestions(movies)
     }
   }
 
@@ -101,9 +99,11 @@ class DecisionEngine {
         print("I got nothing.")
         return
       }
-      for film in films {
-        print(film.title)
+      debugPrint("Telling coordinator to present")
+      DispatchQueue.main.async {
+        self.coordinator?.presentSuggestions(films)
       }
+
     }
   }
 

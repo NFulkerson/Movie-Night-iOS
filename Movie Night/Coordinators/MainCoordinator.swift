@@ -30,6 +30,7 @@ class MainCoordinator: Coordinator {
   @objc func selectMovies() {
     let vc = MovieViewController.instantiate()
     vc.coordinator = self
+    vc.getMovies()
     navigationController.pushViewController(vc, animated: true)
   }
 
@@ -51,10 +52,13 @@ class MainCoordinator: Coordinator {
     decisionMaker.findSuggestions(for: userCoordinator.firstUser, and: userCoordinator.secondUser)
   }
 
-  func presentSuggestions() {
+  func presentSuggestions(_ movies: [Movie]) {
+    debugPrint("Presenting suggestions!")
     let vc = MovieViewController.instantiate()
     vc.coordinator = self
-    
+    vc.title = "Suggested Movies"
+    vc.update(with: movies)
+    self.navigationController.pushViewController(vc, animated: true)
   }
 
   func finish() {

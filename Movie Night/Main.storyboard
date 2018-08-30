@@ -27,38 +27,13 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieCell" id="1aD-8s-d4q" customClass="MovieCollectionCell" customModule="Movie_Night" customModuleProvider="target">
-                                <rect key="frame" x="4" y="20" width="185" height="320"/>
+                                <rect key="frame" x="4" y="133.5" width="256" height="420"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="185" height="320"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="256" height="420"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XFY-R0-KxA">
-                                            <rect key="frame" x="0.0" y="0.0" width="185" height="278"/>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KJU-HR-EjP">
-                                            <rect key="frame" x="2" y="286" width="181" height="32"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
                                 </view>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="XFY-R0-KxA" secondAttribute="bottom" constant="42" id="0Rf-pw-X9h"/>
-                                    <constraint firstAttribute="bottom" secondItem="KJU-HR-EjP" secondAttribute="bottom" constant="2" id="1ya-sw-mLf"/>
-                                    <constraint firstItem="XFY-R0-KxA" firstAttribute="leading" secondItem="1aD-8s-d4q" secondAttribute="leading" id="9tI-tZ-hDv"/>
-                                    <constraint firstAttribute="trailing" secondItem="KJU-HR-EjP" secondAttribute="trailing" constant="2" id="Do4-xl-y89"/>
-                                    <constraint firstItem="XFY-R0-KxA" firstAttribute="top" secondItem="1aD-8s-d4q" secondAttribute="top" id="NIx-hi-cgQ"/>
-                                    <constraint firstItem="KJU-HR-EjP" firstAttribute="leading" secondItem="1aD-8s-d4q" secondAttribute="leading" constant="2" id="qCq-ys-z4b"/>
-                                    <constraint firstItem="KJU-HR-EjP" firstAttribute="top" secondItem="XFY-R0-KxA" secondAttribute="bottom" constant="8" id="qQv-Sk-RX0"/>
-                                    <constraint firstAttribute="trailing" secondItem="XFY-R0-KxA" secondAttribute="trailing" id="tjt-L2-LYd"/>
-                                </constraints>
-                                <size key="customSize" width="185" height="320"/>
-                                <connections>
-                                    <outlet property="movieLabel" destination="KJU-HR-EjP" id="ThE-Z2-zwL"/>
-                                    <outlet property="moviePosterImageView" destination="XFY-R0-KxA" id="WGv-Fz-wTZ"/>
-                                </connections>
+                                <size key="customSize" width="256" height="420"/>
                             </collectionViewCell>
                         </cells>
                         <connections>

@@ -12,8 +12,6 @@ class ActorListDataSource: NSObject, UICollectionViewDataSource {
   var actors: [Person] = []
   var totalActors: Int = 0
   let collectionView: UICollectionView
-  let pendingOperations = PendingOperations()
-  let cache = NSCache<NSString, UIImage>()
 
   init(collectionView: UICollectionView) {
     self.collectionView = collectionView

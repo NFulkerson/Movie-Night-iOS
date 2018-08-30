@@ -12,13 +12,12 @@ class MovieViewController: UICollectionViewController, Storyboarded {
 
   weak var coordinator: MainCoordinator?
   let client = TMDBClient()
+  var presentingSuggestions: Bool = false
 
   private var isFetchingNextPage: Bool = false
   private var currentPage: Int = 1
-
-  lazy var dataSource: MovieListDataSource = {
-    return MovieListDataSource(collectionView: self.collectionView!)
-  }()
+  
+  var dataSource: MovieListDataSource = MovieListDataSource()
 
   lazy var submitButton: UIBarButtonItem = {
     return UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(finish))
@@ -28,42 +27,37 @@ class MovieViewController: UICollectionViewController, Storyboarded {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    collectionView?.register(UINib(nibName: "MovieSelectionCell", bundle: nil), forCellWithReuseIdentifier: "MovieCell")
     collectionView?.dataSource = dataSource
     collectionView?.delegate = self
-    collectionView?.prefetchDataSource = self
+    print("Hi, I am \(self). My datasource is \(dataSource)")
     let layout = PageCollectionLayout(itemSize: CGSize(width: 256, height: 460))
     collectionView?.setCollectionViewLayout(layout, animated: true)
     collectionView?.allowsMultipleSelection = true
 
-    collectionView?.refreshControl = UIRefreshControl()
-    collectionView?.refreshControl?.addTarget(self, action: #selector(refreshList), for: .valueChanged)
-    getMovies()
-
-  }
-
-  @objc func refreshList() {
-    currentPage = 1
-    getMovies(refresh: true)
   }
 
   @objc func finish() {
     coordinator?.userDidFinishPickingMovies(selected)
   }
 
-  func getMovies(refresh: Bool = false) {
+  func getMovies() {
 
     client.send(GetPopularMovies()) { (result) in
       DispatchQueue.main.async {
         switch result {
         case .success(let movies):
-         self.dataSource.update(with: movies.results)
-          self.collectionView?.reloadData()
+          self.update(with: movies.results)
         case .failure:
           return
         }
       }
     }
+  }
+
+  func update(with movies: [Movie]) {
+    dataSource.update(with: movies)
+    collectionView?.reloadData()
   }
 
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -87,8 +81,3 @@ class MovieViewController: UICollectionViewController, Storyboarded {
   }
 }
 
-extension MovieViewController: UICollectionViewDataSourcePrefetching {
-  func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-    print("Should prefetch")
-  }
-}
