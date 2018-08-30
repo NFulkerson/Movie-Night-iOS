@@ -9,13 +9,29 @@
 import UIKit
 import ExpandingCollection
 
-class MovieSelectionCell: BasePageCollectionCell {
-  static let reuseIdentifier = "MovieSuggestionCell"
+class MovieSelectionCell: UICollectionViewCell {
+  static let reuseIdentifier = "MovieCell"
   
   @IBOutlet weak var posterView: UIImageView!
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var genreLabel: UILabel!
   @IBOutlet weak var releaseYearLabel: UILabel!
+
+  override var isSelected: Bool {
+    didSet {
+      if isSelected {
+        UIView.animate(withDuration: 0.8) {
+          self.layer.borderWidth = 3
+          self.layer.borderColor = UIColor.blue.cgColor
+        }
+      } else {
+        UIView.animate(withDuration: 0.8) {
+          self.layer.borderWidth = 0
+          self.layer.borderColor = UIColor.clear.cgColor
+        }
+      }
+    }
+  }
 
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -26,7 +42,7 @@ class MovieSelectionCell: BasePageCollectionCell {
     self.posterView.kf.setImage(with: movie.imageURLPath)
     self.titleLabel.text = movie.title
     self.genreLabel.text = movie.genres.map({$0.name}).joined(separator: "/")
-    self.releaseYearLabel.text = movie.releaseDate ?? "Unknown"
+    self.releaseYearLabel.text = movie.releaseYear
   }
 
 }
